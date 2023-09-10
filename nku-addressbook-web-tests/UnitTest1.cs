@@ -9,6 +9,7 @@ namespace nku_addressbook_web_tests
         [TestMethod]
         public void TestMethod1()
         {
+
         }
     }
 }
