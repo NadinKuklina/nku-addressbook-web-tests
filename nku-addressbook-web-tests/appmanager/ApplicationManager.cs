@@ -21,7 +21,6 @@ namespace WebAddressbookTests
 
         public ApplicationManager()
         {
-
             loginHelper = new LoginHelper(this);
             navigator = new NavigationHelper(this, baseURL);
             groupHelper = new GroupHelper(this);
