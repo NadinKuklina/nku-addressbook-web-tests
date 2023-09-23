@@ -24,6 +24,29 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public ContactHelper ModifyByIndex(int i, ContactData newData)
+        {
+            manager.Navigator.GoToHomePage();
+            SelectContactByIndex(i);
+            InitContactModification(i);
+            FillContactForm(newData);
+            SubmitContactModification();
+            
+            return this;
+        }
+
+        public ContactHelper SubmitContactModification()
+        {
+            driver.FindElement(By.Name("update")).Click();
+            return this;
+        }
+
+        public ContactHelper InitContactModification(int i)
+        {
+            driver.FindElement(By.LinkText("edit.php?id="+i+"")).Click();
+            return this;
+        }
+
         public ContactHelper ConfirmYesInAlert()
         {
             driver.SwitchTo().Alert().Accept();
