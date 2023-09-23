@@ -11,9 +11,13 @@ namespace WebAddressbookTests.tests
     public class GroupModificationTests : TestBase
     {
         [Test]
-        public void GroupModificationTests()
+        public void GroupModificationTest()
         {
-           
+            GroupData newData = new GroupData("zzz");
+            newData.Header = "tttt";
+            newData.Footer = "ffqqqf";
+
+            app.Groups.Modify(1, newData);
         }
     }
 }
