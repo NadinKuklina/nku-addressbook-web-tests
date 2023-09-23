@@ -15,6 +15,33 @@ namespace WebAddressbookTests
         {            
         }
 
+        public ContactHelper RemoveByIndex(int i)
+        {
+            manager.Navigator.GoToHomePage();
+            SelectContactByIndex(i);
+            DeleteContact();
+            ConfirmYesInAlert();
+            return this;
+        }
+
+        public ContactHelper ConfirmYesInAlert()
+        {
+            driver.SwitchTo().Alert().Accept();
+            return this;
+        }
+
+        public ContactHelper DeleteContact()
+        {
+            driver.FindElement(By.CssSelector("input[value='Delete']")).Click();
+            return this;
+        }
+
+        public ContactHelper SelectContactByIndex(int i)
+        {
+            driver.FindElement(By.CssSelector("input[id='"+ i +"']")).Click();
+            return this;
+        }
+
         public ContactHelper InitContactCreation()
         {
             driver.FindElement(By.LinkText("add new")).Click();
