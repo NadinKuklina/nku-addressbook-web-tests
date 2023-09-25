@@ -26,9 +26,8 @@ namespace WebAddressbookTests
 
         public ContactHelper ModifyByIndex(int i, ContactData newData)
         {
-            manager.Navigator.GoToHomePage();
-            SelectContactByIndex(i);
-            InitContactModification(i);
+            manager.Navigator.GoToHomePage();            
+            InitContactModificationByIndex(i);
             FillContactForm(newData);
             SubmitContactModification();
             
@@ -41,9 +40,9 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public ContactHelper InitContactModification(int i)
+        public ContactHelper InitContactModificationByIndex(int i)
         {
-            driver.FindElement(By.LinkText("edit.php?id="+i+"")).Click();
+            driver.FindElement(By.XPath("//tr[2]/td/a[contains(@href,'edit.php?')]")).Click();
             return this;
         }
 
@@ -61,7 +60,7 @@ namespace WebAddressbookTests
 
         public ContactHelper SelectContactByIndex(int i)
         {
-            driver.FindElement(By.CssSelector("input[id='"+ i +"']")).Click();
+            driver.FindElement(By.XPath("//tr[2]/td/input[@name='selected[]']")).Click();
             return this;
         }
 
