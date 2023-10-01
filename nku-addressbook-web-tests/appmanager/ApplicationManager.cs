@@ -12,8 +12,8 @@ namespace WebAddressbookTests
 {
     public class ApplicationManager
     {
-        protected IWebDriver driver = new FirefoxDriver();      
-        protected string baseURL = "http://localhost/addressbook";
+        protected IWebDriver driver;      
+        protected string baseURL;
 
         protected LoginHelper loginHelper;
         protected NavigationHelper navigator;
@@ -24,23 +24,29 @@ namespace WebAddressbookTests
 
         private ApplicationManager()
         {
+            driver = new FirefoxDriver();
+            baseURL = "http://localhost/addressbook";
+
             loginHelper = new LoginHelper(this);
             navigator = new NavigationHelper(this, baseURL);
             groupHelper = new GroupHelper(this);
             contactHelper = new ContactHelper(this);
         }
-
+        
         ~ApplicationManager()
         {
             try
             {
                 driver.Quit();
+                System.Console.Out.Write("Сработал driver.Quit ");
             }
             catch (Exception)
             {
                 //Ignore errors if unable to close the browser
+                System.Console.Out.Write("Не сработал driver.Quit ");
             }
-        }
+        }       
+        
 
         public static ApplicationManager GetIntance()
         {

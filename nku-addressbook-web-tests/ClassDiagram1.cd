@@ -73,5 +73,12 @@
       <Field Name="contactHelper" />
     </ShowAsAssociation>
   </Class>
+  <Class Name="WebAddressbookTests.TestSuiteFixture">
+    <Position X="5" Y="3.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>tests\TestSuiteFixture.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

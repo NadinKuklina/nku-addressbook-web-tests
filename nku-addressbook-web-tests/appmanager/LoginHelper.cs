@@ -24,6 +24,6 @@ namespace WebAddressbookTests
         public void Logout()
         {
             driver.FindElement(By.LinkText("Logout")).Click();
-        }
+        }      
     }
 }

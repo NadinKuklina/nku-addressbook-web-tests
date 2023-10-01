@@ -17,7 +17,17 @@ namespace WebAddressbookTests
         [SetUp]
         public void SetupTest()
         {
-            app = ApplicationManager.GetIntance();            
-        }       
+            app = ApplicationManager.GetIntance();
+            System.Console.Out.Write("Сработал не глобальный SetupTest ");
+        }     
+
+        /*
+        [TearDown]
+        public void TearDownTest()
+        {
+            app.Driver.Quit();
+            System.Console.Out.Write("Cработал driver.Quit ");
+        }
+        */
     }
 }
