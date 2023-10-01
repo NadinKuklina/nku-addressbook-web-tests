@@ -3,7 +3,7 @@
   <Class Name="WebAddressbookTests.TestBase">
     <Position X="1.25" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAACAAAAAAAAA=</HashCode>
       <FileName>tests\TestBase.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -42,7 +42,7 @@
   <Class Name="WebAddressbookTests.LoginHelper" Collapsed="true">
     <Position X="6.5" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAASAAAAAAA=</HashCode>
       <FileName>appmanager\LoginHelper.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -56,7 +56,7 @@
   <Class Name="WebAddressbookTests.HelperBase" Collapsed="true">
     <Position X="8.75" Y="2" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAACEAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAABCEAAAAAAAAAQAAAAAAAAA=</HashCode>
       <FileName>appmanager\HelperBase.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -72,13 +72,6 @@
       <Field Name="groupHelper" />
       <Field Name="contactHelper" />
     </ShowAsAssociation>
-  </Class>
-  <Class Name="WebAddressbookTests.TestSuiteFixture">
-    <Position X="5" Y="3.75" Width="2" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>tests\TestSuiteFixture.cs</FileName>
-    </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

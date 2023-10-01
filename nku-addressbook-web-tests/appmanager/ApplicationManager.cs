@@ -32,28 +32,27 @@ namespace WebAddressbookTests
             groupHelper = new GroupHelper(this);
             contactHelper = new ContactHelper(this);
         }
-       
-        /*
+
         ~ApplicationManager()
         {
             try
             {
-                driver.Quit();
-                System.Console.Out.Write("Сработал driver.Quit ");
+                driver.Quit();                
             }
             catch (Exception)
             {
-                //Ignore errors if unable to close the browser
-                System.Console.Out.Write("Не сработал driver.Quit ");
+                //Ignore errors if unable to close the browser               
             }
         }       
-        */
+        
 
         public static ApplicationManager GetIntance()
         {
             if (! app.IsValueCreated)
             {
-                app.Value = new ApplicationManager();
+                ApplicationManager newInstance = new ApplicationManager();
+                newInstance.Navigator.GoToHomePage();
+                app.Value = newInstance;
             }
             return app.Value;
         }

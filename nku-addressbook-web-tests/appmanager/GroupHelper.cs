@@ -61,6 +61,7 @@ namespace WebAddressbookTests
 
         public GroupHelper InitGroupCreation()
         {
+            manager.Navigator.GoToGroupPage();
             driver.FindElement(By.Name("new")).Click();
             return this;
         }

@@ -15,19 +15,9 @@ namespace WebAddressbookTests
         protected ApplicationManager app;
 
         [SetUp]
-        public void SetupTest()
+        public void SetupApplicationManager()
         {
-            app = ApplicationManager.GetIntance();
-            System.Console.Out.Write("Сработал не глобальный SetupTest ");
-        }     
-
-        /*
-        [TearDown]
-        public void TearDownTest()
-        {
-            app.Driver.Quit();
-            System.Console.Out.Write("Cработал driver.Quit ");
-        }
-        */
+            app = ApplicationManager.GetIntance();            
+        } 
     }
 }
