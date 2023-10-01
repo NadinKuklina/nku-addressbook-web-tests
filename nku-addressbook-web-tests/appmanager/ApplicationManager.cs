@@ -6,6 +6,7 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
+using System.Threading.Tasks;
 
 namespace WebAddressbookTests
 {
@@ -19,22 +20,17 @@ namespace WebAddressbookTests
         protected GroupHelper groupHelper;
         protected ContactHelper contactHelper;
 
-        public ApplicationManager()
+        private static ThreadLocal<ApplicationManager> app = new ThreadLocal<ApplicationManager>();
+
+        private ApplicationManager()
         {
             loginHelper = new LoginHelper(this);
             navigator = new NavigationHelper(this, baseURL);
             groupHelper = new GroupHelper(this);
             contactHelper = new ContactHelper(this);
         }
-        public IWebDriver Driver 
-        { 
-            get
-            {
-                return driver;
-            }
-        }
 
-        public void Stop()
+        ~ApplicationManager()
         {
             try
             {
@@ -43,8 +39,25 @@ namespace WebAddressbookTests
             catch (Exception)
             {
                 //Ignore errors if unable to close the browser
-            }           
+            }
         }
+
+        public static ApplicationManager GetIntance()
+        {
+            if (! app.IsValueCreated)
+            {
+                app.Value = new ApplicationManager();
+            }
+            return app.Value;
+        }
+
+        public IWebDriver Driver 
+        { 
+            get
+            {
+                return driver;
+            }
+        }        
 
         public LoginHelper Auth 
         { 
