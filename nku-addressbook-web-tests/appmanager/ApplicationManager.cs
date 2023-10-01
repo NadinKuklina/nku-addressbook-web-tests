@@ -32,7 +32,8 @@ namespace WebAddressbookTests
             groupHelper = new GroupHelper(this);
             contactHelper = new ContactHelper(this);
         }
-        
+       
+        /*
         ~ApplicationManager()
         {
             try
@@ -46,7 +47,7 @@ namespace WebAddressbookTests
                 System.Console.Out.Write("Не сработал driver.Quit ");
             }
         }       
-        
+        */
 
         public static ApplicationManager GetIntance()
         {

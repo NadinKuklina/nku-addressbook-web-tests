@@ -23,7 +23,6 @@ namespace WebAddressbookTests
          public void TearDownTest()
          {
              ApplicationManager.GetIntance().Driver.Quit();
-         }
-        
+         }        
     }
 }
