@@ -42,7 +42,8 @@ namespace WebAddressbookTests
 
         public ContactHelper InitContactModificationByIndex(int i)
         {
-            driver.FindElement(By.XPath("//tr[2]/td/a[contains(@href,'edit.php?')]")).Click();
+            int newi = i + 1;
+            driver.FindElement(By.XPath("//tr["+newi+"]/td/a[contains(@href,'edit.php?')]")).Click();
             return this;
         }
 
@@ -60,7 +61,8 @@ namespace WebAddressbookTests
 
         public ContactHelper SelectContactByIndex(int i)
         {
-            driver.FindElement(By.XPath("//tr[2]/td/input[@name='selected[]']")).Click();
+            int newi = i + 1;
+            driver.FindElement(By.XPath("//tr["+newi+"]/td/input[@name='selected[]']")).Click();
             return this;
         }
 
