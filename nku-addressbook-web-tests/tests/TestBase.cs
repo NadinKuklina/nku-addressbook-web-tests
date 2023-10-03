@@ -18,6 +18,14 @@ namespace WebAddressbookTests
         public void SetupApplicationManager()
         {
             app = ApplicationManager.GetIntance();            
-        } 
+        }
+
+        /*
+        [TearDown]
+        public void TearDownApplicationManager()
+        {
+            ApplicationManager.GetIntance().Driver.Quit();
+        }
+        */
     }
 }

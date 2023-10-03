@@ -25,7 +25,7 @@ namespace WebAddressbookTests
         private ApplicationManager()
         {
             driver = new FirefoxDriver();
-            baseURL = "http://localhost/addressbook";
+            baseURL = "http://localhost/addressbook/";
 
             loginHelper = new LoginHelper(this);
             navigator = new NavigationHelper(this, baseURL);
@@ -33,6 +33,7 @@ namespace WebAddressbookTests
             contactHelper = new ContactHelper(this);
         }
 
+        
         ~ApplicationManager()
         {
             try
@@ -43,8 +44,7 @@ namespace WebAddressbookTests
             {
                 //Ignore errors if unable to close the browser               
             }
-        }       
-        
+        }                   
 
         public static ApplicationManager GetIntance()
         {

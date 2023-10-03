@@ -30,6 +30,14 @@ namespace WebAddressbookTests
         public GroupHelper Modify(int p, GroupData newData)
         {
             manager.Navigator.GoToGroupPage();
+            if (!IsElementPresent(By.CssSelector("span.group")))
+            {
+                GroupData group = new GroupData("testgroupsname");
+                group.Header = "testgroupsheader";
+                group.Footer = "testgroupsfooter";
+
+                Create(group);
+            }
             SelectGroup(p);
             InitGroupModification();
             FillGroupForm(newData);
@@ -50,10 +58,19 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public GroupHelper Remove(int p)
+        public GroupHelper RemoveByIndex(int i)
         {
             manager.Navigator.GoToGroupPage();
-            SelectGroup(p);
+
+            if (!IsElementPresent(By.CssSelector("span.group")))
+            {
+                GroupData group = new GroupData("testgroupsname");
+                group.Header = "testgroupsheader";
+                group.Footer = "testgroupsfooter";
+
+                Create(group);
+            }
+            SelectGroup(i);                      
             RemoveGroup();
             ReturnToGroupPage();
             return this;
@@ -83,12 +100,20 @@ namespace WebAddressbookTests
         public GroupHelper ReturnToGroupPage()
         {
             driver.FindElement(By.LinkText("groups")).Click();
-            driver.FindElement(By.LinkText("Logout")).Click();
+            //driver.FindElement(By.LinkText("Logout")).Click();
             return this;
         }
         public GroupHelper SelectGroup(int index)
         {
-            driver.FindElement(By.XPath("//div[@id='content']/form/span[" + index + "]/input")).Click();
+            if (IsElementPresent(By.XPath("//div[@id='content']/form/span[" + index + "]/input")))
+            {
+                driver.FindElement(By.XPath("//div[@id='content']/form/span[" + index + "]/input")).Click();
+            }
+            else
+            {
+
+                driver.FindElement(By.XPath("//div[@id='content']/form/span[1]/input")).Click();
+            }           
             return this;
         }
 
