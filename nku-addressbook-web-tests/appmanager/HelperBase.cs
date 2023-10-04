@@ -39,15 +39,6 @@ namespace WebAddressbookTests
             {
                 return false;
             }
-        }
-      
-        public int CountOfContacts()
-        {
-            int count = 0;
-            manager.Navigator.GoToHomePage();           
-            count = driver.FindElements(By.XPath("//tr[@name='entry']")).Count;
-            
-            return count;
-        }
+        }            
     }
 }
