@@ -15,6 +15,16 @@ namespace WebAddressbookTests
         {            
         }
 
+        public ContactHelper CreateContact(ContactData contactdata)
+        {
+            ContactData contact = new ContactData("nku1", "lastname2");
+            InitContactCreation();
+            FillContactForm(contact);
+            SubmitContact();
+            ReturnToHomePage();
+            return this;
+        }
+
         public ContactHelper RemoveByIndex(int i)
         {
             manager.Navigator.GoToHomePage();

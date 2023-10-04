@@ -27,18 +27,10 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public GroupHelper Modify(int p, GroupData newData)
+        public GroupHelper ModifyByIndex(int i, GroupData newData)
         {
-            manager.Navigator.GoToGroupPage();
-            if (!IsElementPresent(By.CssSelector("span.group")))
-            {
-                GroupData group = new GroupData("testgroupsname");
-                group.Header = "testgroupsheader";
-                group.Footer = "testgroupsfooter";
-
-                Create(group);
-            }
-            SelectGroup(p);
+            manager.Navigator.GoToGroupPage();            
+            SelectGroup(i);
             InitGroupModification();
             FillGroupForm(newData);
             SubmitGroupModification();
@@ -60,16 +52,7 @@ namespace WebAddressbookTests
 
         public GroupHelper RemoveByIndex(int i)
         {
-            manager.Navigator.GoToGroupPage();
-
-            if (!IsElementPresent(By.CssSelector("span.group")))
-            {
-                GroupData group = new GroupData("testgroupsname");
-                group.Header = "testgroupsheader";
-                group.Footer = "testgroupsfooter";
-
-                Create(group);
-            }
+            manager.Navigator.GoToGroupPage();            
             SelectGroup(i);                      
             RemoveGroup();
             ReturnToGroupPage();
@@ -121,6 +104,6 @@ namespace WebAddressbookTests
         {
             driver.FindElement(By.Name("delete")).Click();
             return this;
-        }
+        }        
     }
 }
