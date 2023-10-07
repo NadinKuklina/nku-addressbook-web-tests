@@ -15,13 +15,13 @@ namespace WebAddressbookTests
         [Test]
         public void GroupRemovalTest()
         {        
-            int i = 1;
+            int i = 5;
 
             app.Navigator.GoToGroupPage();                 
 
-            if (app.Driver.FindElements(By.CssSelector("span.group")).Count < i)
+            if (app.Groups.iGroupsCount() < i)
             {
-                while (app.Driver.FindElements(By.CssSelector("span.group")).Count < i)
+                while (app.Groups.iGroupsCount() < i)
                 {
                     GroupData group = new GroupData("testgroupsname");
                     group.Header = "testgroupsheader";

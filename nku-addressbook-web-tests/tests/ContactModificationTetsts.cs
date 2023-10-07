@@ -20,9 +20,9 @@ namespace WebAddressbookTests
 
             app.Navigator.GoToHomePage();
 
-            if (app.Driver.FindElements(By.XPath("//tr[@name='entry']")).Count < i)
+            if (app.Contacts.iContactsCount() < i)
             {
-                while (app.Driver.FindElements(By.XPath("//tr[@name='entry']")).Count < i)
+                while (app.Contacts.iContactsCount() < i)
                 {
                     ContactData contact = new ContactData("first name", "last name");
 

@@ -39,6 +39,18 @@ namespace WebAddressbookTests
             {
                 return false;
             }
-        }            
+        } 
+        
+        public int iGroupsCount()
+        {
+            manager.Navigator.GoToGroupPage();
+            return driver.FindElements(By.CssSelector("span.group")).Count;
+        }
+
+        public int iContactsCount()
+        {
+            manager.Navigator.GoToHomePage();
+            return driver.FindElements(By.XPath("//tr[@name='entry']")).Count;
+        }
     }
 }
