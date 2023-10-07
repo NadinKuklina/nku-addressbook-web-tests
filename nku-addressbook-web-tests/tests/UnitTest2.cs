@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UtestnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
