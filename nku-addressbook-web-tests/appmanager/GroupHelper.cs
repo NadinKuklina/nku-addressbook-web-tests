@@ -102,9 +102,9 @@ namespace WebAddressbookTests
         }
         public GroupHelper SelectGroup(int index)
         {
-            if (IsElementPresent(By.XPath("//div[@id='content']/form/span[" + index + "]/input")))
+            if (IsElementPresent(By.XPath("//div[@id='content']/form/span[" + (index + 1) + "]/input")))
             {
-                driver.FindElement(By.XPath("//div[@id='content']/form/span[" + index + "]/input")).Click();
+                driver.FindElement(By.XPath("//div[@id='content']/form/span[" + (index + 1) + "]/input")).Click();
             }
             else
             {

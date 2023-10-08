@@ -20,12 +20,12 @@ namespace WebAddressbookTests
             app = ApplicationManager.GetIntance();            
         }
 
-        /*
+        
         [TearDown]
         public void TearDownApplicationManager()
         {
             ApplicationManager.GetIntance().Driver.Quit();
         }
-        */
+        
     }
 }

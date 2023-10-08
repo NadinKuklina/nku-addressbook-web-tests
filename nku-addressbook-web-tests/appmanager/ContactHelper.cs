@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -23,6 +24,19 @@ namespace WebAddressbookTests
             SubmitContact();
             ReturnToHomePage();
             return this;
+        }
+
+        internal List<ContactData> GetContactsList()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+
+            manager.Navigator.GoToHomePage();
+            ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[@name='entry']"));
+            foreach (IWebElement element in elements)
+            {
+                contacts.Add(new ContactData((element.Text).Substring((element.Text).IndexOf(" ")), (element.Text).Substring(0, (element.Text).IndexOf(" "))));
+            }
+            return contacts;
         }
 
         public ContactHelper RemoveByIndex(int i)
@@ -69,7 +83,7 @@ namespace WebAddressbookTests
         public ContactHelper InitContactModificationByIndex(int i)
         {
             int newi = i + 1;
-            driver.FindElement(By.XPath("//tr["+newi+"]/td/a[contains(@href,'edit.php?')]")).Click();
+            driver.FindElement(By.XPath("//tr["+(newi+1)+"]/td/a[contains(@href,'edit.php?')]")).Click();
             return this;
         }
 
@@ -88,7 +102,7 @@ namespace WebAddressbookTests
         public ContactHelper SelectContactByIndex(int i)
         {
             int newi = i + 1;
-            driver.FindElement(By.XPath("//tr["+newi+"]/td/input[@name='selected[]']")).Click();
+            driver.FindElement(By.XPath("//tr["+(newi+1)+"]/td/input[@name='selected[]']")).Click();
             return this;
         }
 

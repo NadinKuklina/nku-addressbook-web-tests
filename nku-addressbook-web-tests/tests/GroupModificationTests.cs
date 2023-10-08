@@ -7,6 +7,7 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
+using System.Collections.Generic;
 
 namespace WebAddressbookTests
 {
@@ -16,7 +17,7 @@ namespace WebAddressbookTests
         [Test]
         public void GroupModificationTest()
         {
-            int i = 1;
+            int i = 0;
 
             app.Navigator.GoToGroupPage();
 
