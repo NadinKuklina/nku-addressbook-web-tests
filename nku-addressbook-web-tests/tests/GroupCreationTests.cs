@@ -59,8 +59,9 @@ namespace WebAddressbookTests
         public void BadNameGroupCreationTest()
         {
             GroupData group = new GroupData("a'a");
-            group.Header = "";
-            group.Footer = "";
+            group.Header = "d\\d\t\n";
+            //вербатим строка - Дословный текст
+            group.Footer = @"d\d";
 
             List<GroupData> oldGroups = app.Groups.GetGroupList();
 
