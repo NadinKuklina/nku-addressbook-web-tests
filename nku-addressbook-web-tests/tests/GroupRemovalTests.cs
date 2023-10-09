@@ -33,6 +33,7 @@ namespace WebAddressbookTests
             }
 
             List<GroupData> oldGroups = app.Groups.GetGroupList();
+            GroupData toBeRemoved = oldGroups[i];
 
             app.Groups.RemoveByIndex(i);
 
@@ -44,6 +45,11 @@ namespace WebAddressbookTests
             newGroups.Sort();
 
             Assert.AreEqual(oldGroups, newGroups);
+
+            foreach (GroupData group in newGroups)
+            {
+                Assert.AreNotEqual(group.Id, toBeRemoved.Id);
+            }
 
 
 
