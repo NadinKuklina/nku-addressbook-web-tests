@@ -11,7 +11,9 @@ using OpenQA.Selenium.Support.UI;
 namespace WebAddressbookTests
 {
     public class GroupHelper : HelperBase
-    {    
+    {
+        private List<GroupData> groupCache = null;       
+
         public GroupHelper(ApplicationManager manager) 
             : base(manager)
         {           
@@ -30,15 +32,19 @@ namespace WebAddressbookTests
 
         public List<GroupData> GetGroupList()
         {
-            List<GroupData> groups = new List<GroupData>();
-
-            manager.Navigator.GoToGroupPage();
-            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
-            foreach (IWebElement element in elements)
-            {                
-                groups.Add(new GroupData(element.Text));
+            if (groupCache == null)
+            {
+                groupCache = new List<GroupData>();
+                manager.Navigator.GoToGroupPage();
+                ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
+                foreach (IWebElement element in elements)
+                {
+                    groupCache.Add(new GroupData(element.Text));
+                }
             }
-            return groups;
+
+            //возвращаем копию groupCache
+            return new List<GroupData>(groupCache);
         }
 
         public GroupHelper ModifyByIndex(int i, GroupData newData)
@@ -61,6 +67,7 @@ namespace WebAddressbookTests
         public GroupHelper InitGroupModification()
         {
             driver.FindElement(By.Name("edit")).Click();
+            groupCache = null;
             return this;
         }
 
@@ -92,6 +99,7 @@ namespace WebAddressbookTests
         public GroupHelper SubmitGroupCreation()
         {
             driver.FindElement(By.Name("submit")).Click();
+            groupCache = null;
             return this;
         }
         public GroupHelper ReturnToGroupPage()
@@ -117,6 +125,7 @@ namespace WebAddressbookTests
         public GroupHelper RemoveGroup()
         {
             driver.FindElement(By.Name("delete")).Click();
+            groupCache = null;
             return this;
         }        
     }

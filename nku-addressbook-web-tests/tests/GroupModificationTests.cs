@@ -41,6 +41,8 @@ namespace WebAddressbookTests
 
             app.Groups.ModifyByIndex(i, newData);
 
+            Assert.AreEqual(oldGroups.Count, app.Groups.iGroupsCount());
+
             List<GroupData> newGroups = app.Groups.GetGroupList();
             oldGroups[i].Name = newData.Name;
             oldGroups.Sort();

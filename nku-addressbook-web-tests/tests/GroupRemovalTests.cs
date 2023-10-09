@@ -36,7 +36,8 @@ namespace WebAddressbookTests
 
             app.Groups.RemoveByIndex(i);
 
-            
+            Assert.AreEqual(oldGroups.Count - 1, app.Groups.iGroupsCount());
+
             List<GroupData> newGroups = app.Groups.GetGroupList();
             oldGroups.RemoveAt(i);
             oldGroups.Sort();
