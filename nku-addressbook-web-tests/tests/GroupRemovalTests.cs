@@ -20,9 +20,9 @@ namespace WebAddressbookTests
 
             app.Navigator.GoToGroupPage();                 
 
-            if (app.Groups.iGroupsCount() < i)
+            if (app.Groups.iGroupsCount() < i+1)
             {
-                while (app.Groups.iGroupsCount() < i)
+                while (app.Groups.iGroupsCount() < i+1)
                 {
                     GroupData group = new GroupData("testgroupsname");
                     group.Header = "testgroupsheader";
@@ -35,9 +35,12 @@ namespace WebAddressbookTests
             List<GroupData> oldGroups = app.Groups.GetGroupList();
 
             app.Groups.RemoveByIndex(i);
+
             
             List<GroupData> newGroups = app.Groups.GetGroupList();
             oldGroups.RemoveAt(i);
+            oldGroups.Sort();
+            newGroups.Sort();
 
             Assert.AreEqual(oldGroups, newGroups);
 

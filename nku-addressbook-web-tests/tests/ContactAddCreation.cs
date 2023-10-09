@@ -17,11 +17,16 @@ namespace WebAddressbookTests
         public void ContactCreationTest()
         {             
             ContactData contact = new ContactData("nku2", "lastname2");
-            List<ContactData> oldContacts = app.Contacts.GetContactsList();
-            app.Contacts.CreateContact(contact);
-            List<ContactData> newContacts = app.Contacts.GetContactsList();
 
-            Assert.AreEqual(oldContacts.Count + 1, newContacts.Count);  
+            List<ContactData> oldContacts = app.Contacts.GetContactsList();
+
+            app.Contacts.CreateContact(contact);
+
+            oldContacts.Add(contact);
+            oldContacts.Sort();
+            List<ContactData> newContacts = app.Contacts.GetContactsList();          
+            newContacts.Sort();
+            Assert.AreEqual(oldContacts, newContacts);  
         } 
     }
 }

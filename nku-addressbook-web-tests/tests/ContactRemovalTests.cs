@@ -32,9 +32,14 @@ namespace WebAddressbookTests
             }
 
             List<ContactData> oldContacts = app.Contacts.GetContactsList();
+
             app.Contacts.RemoveByIndex(i);
-            List<ContactData> newContacts = app.Contacts.GetContactsList();
+
             oldContacts.RemoveAt(i);
+            oldContacts.Sort();
+
+            List<ContactData> newContacts = app.Contacts.GetContactsList();    
+            newContacts.Sort();
 
             Assert.AreEqual(oldContacts, newContacts);
         }

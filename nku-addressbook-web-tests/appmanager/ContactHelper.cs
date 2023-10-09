@@ -16,9 +16,9 @@ namespace WebAddressbookTests
         {            
         }
 
-        public ContactHelper CreateContact(ContactData contactdata)
+        public ContactHelper CreateContact(ContactData contact)
         {
-            ContactData contact = new ContactData("nku1", "lastname2");
+            manager.Navigator.GoToHomePage();
             InitContactCreation();
             FillContactForm(contact);
             SubmitContact();
@@ -28,28 +28,30 @@ namespace WebAddressbookTests
 
         internal List<ContactData> GetContactsList()
         {
-            List<ContactData> contacts = new List<ContactData>();
+            List<ContactData> contacts = new List<ContactData>();            
 
             manager.Navigator.GoToHomePage();
-            ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[@name='entry']"));
-            foreach (IWebElement element in elements)
+
+            if (IsElementPresent(By.XPath("//tr[@name='entry']")))
             {
-                contacts.Add(new ContactData((element.Text).Substring((element.Text).IndexOf(" ")), (element.Text).Substring(0, (element.Text).IndexOf(" "))));
+                string firstname;
+                string lastname;
+                ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[@name='entry']"));
+
+                for (int i = 0; i < elements.Count; i ++)
+                {
+                    firstname = driver.FindElement(By.XPath("//tr["+(i+2)+"][@name='entry']/td[3]")).Text;
+                    lastname = driver.FindElement(By.XPath("//tr["+(i+2)+"][@name='entry']/td[2]")).Text;
+                    contacts.Add(new ContactData(firstname, lastname));
+                }               
             }
+           
             return contacts;
         }
 
         public ContactHelper RemoveByIndex(int i)
         {
-            manager.Navigator.GoToHomePage();
-            if(!IsElementPresent(By.XPath("//tr[@name='entry']")))
-            {
-                ContactData contact = new ContactData("first name", "last name");
-                InitContactCreation();
-                FillContactForm(contact);
-                SubmitContact();
-                ReturnToHomePage();
-            }
+            manager.Navigator.GoToHomePage();           
             SelectContactByIndex(i);
             DeleteContact();
             ConfirmYesInAlert();
@@ -58,15 +60,7 @@ namespace WebAddressbookTests
 
         public ContactHelper ModifyByIndex(int i, ContactData newData)
         {
-            manager.Navigator.GoToHomePage();
-            if (!IsElementPresent(By.XPath("//tr[@name='entry']")))
-            {
-                ContactData contact = new ContactData("first name", "last name");
-                InitContactCreation();
-                FillContactForm(contact);
-                SubmitContact();
-                ReturnToHomePage();
-            }
+            manager.Navigator.GoToHomePage();           
             InitContactModificationByIndex(i);
             FillContactForm(newData);
             SubmitContactModification();
@@ -81,9 +75,8 @@ namespace WebAddressbookTests
         }
 
         public ContactHelper InitContactModificationByIndex(int i)
-        {
-            int newi = i + 1;
-            driver.FindElement(By.XPath("//tr["+(newi+1)+"]/td/a[contains(@href,'edit.php?')]")).Click();
+        {            
+            driver.FindElement(By.XPath("//tr["+(i+2)+"]/td/a[contains(@href,'edit.php?')]")).Click();
             return this;
         }
 
@@ -100,9 +93,8 @@ namespace WebAddressbookTests
         }
 
         public ContactHelper SelectContactByIndex(int i)
-        {
-            int newi = i + 1;
-            driver.FindElement(By.XPath("//tr["+(newi+1)+"]/td/input[@name='selected[]']")).Click();
+        {            
+            driver.FindElement(By.XPath("//tr["+(i+2)+"]/td/input[@name='selected[]']")).Click();
             return this;
         }
 

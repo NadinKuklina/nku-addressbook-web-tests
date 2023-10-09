@@ -21,9 +21,9 @@ namespace WebAddressbookTests
 
             app.Navigator.GoToGroupPage();
 
-            if (app.Groups.iGroupsCount() < i)
+            if (app.Groups.iGroupsCount() < i+1)
             {
-                while (app.Groups.iGroupsCount() < i)
+                while (app.Groups.iGroupsCount() < i+1)
                 {
                     GroupData group = new GroupData("testgroupsname");
                     group.Header = "testgroupsheader";
