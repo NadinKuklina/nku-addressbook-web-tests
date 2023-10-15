@@ -39,11 +39,31 @@ namespace WebAddressbookTests
 
         }
 
+        public ContactData GetContactInformationFromDetailPage(int index)
+        {
+            manager.Navigator.GoToHomePage();
+            OpenDetailInformationByIndex(index);
+
+            string fioFromDetailPage = driver.FindElement(By.XPath("//div[@id='content']/b")).GetAttribute("textContent");       
+            
+            return new ContactData("", "")
+            {
+                FIO = fioFromDetailPage
+            };
+        }
+
+        public ContactHelper OpenDetailInformationByIndex(int index)
+        {
+            driver.FindElement(By.XPath("//tr[" + (index + 2) + "][@name='entry']/td[@class='center']/a[contains(@href,'view.php?')]")).Click();            
+            return this;
+        }
+
         public ContactData GetContactInformationFromEditForm(int index)
         {
             manager.Navigator.GoToHomePage();
-            InitContactModificationByIndex(0);
+            InitContactModificationByIndex(index);
             string firstName = driver.FindElement(By.Name("firstname")).GetAttribute("value");
+            string middleName = driver.FindElement(By.Name("middlename")).GetAttribute("value");
             string lastName = driver.FindElement(By.Name("lastname")).GetAttribute("value");
             string address = driver.FindElement(By.Name("address")).GetAttribute("value");
 
@@ -51,13 +71,22 @@ namespace WebAddressbookTests
             string mobilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value");
             string workPhone = driver.FindElement(By.Name("work")).GetAttribute("value");
 
+            string fio = firstName;
+
+            if (!(middleName == null || middleName == ""))
+            {
+                fio = fio + " " + middleName;
+            }
+
+            fio = fio + " " + lastName;            
+
             return new ContactData(firstName, lastName)
             {
                 Address = address,
                 HomePhone = homePhone,
                 MobilePhone = mobilePhone,                    
-                WorkPhone = workPhone
-                
+                WorkPhone = workPhone,
+                FIO = fio            
             };
         }
 
@@ -71,7 +100,7 @@ namespace WebAddressbookTests
             return this;
         }
 
-        internal List<ContactData> GetContactsList()
+        public List<ContactData> GetContactsList()
         {
             if(contactCache == null)
             {

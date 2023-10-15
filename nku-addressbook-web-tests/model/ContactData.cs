@@ -13,12 +13,43 @@ namespace WebAddressbookTests
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
         private string allPhones;
+        private string middleName = "";
+        private string fio;
+
         public string Firstname { get; set; }
-       
+        public string MiddleName { get; set; }
+
         public string Lastname { get; set; }
         public string Address { get; set; }
         public string HomePhone { get; set; }
         public string MobilePhone { get; set; }
+        public string FIO 
+        { 
+            get
+            {
+                if (fio != null)
+                {
+                    return fio;
+                }
+                else
+                {
+                    string result = Firstname;
+
+                    if (!(middleName == null || middleName == ""))
+                    {
+                        result = result + " " + MiddleName;
+                    }
+
+                    result = result + " " + Lastname;
+
+                    return result;
+                }
+            }
+            set
+            {
+                fio = value;
+            }
+        }
         public string WorkPhone { get; set; }
         public string AllPhones 
         {
