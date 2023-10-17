@@ -61,7 +61,9 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    return (CleanUp(HomePhone) + CleanUp(MobilePhone) + CleanUp(WorkPhone)).Trim();
+                    return (CleanUp(HomePhone) 
+                        + "\r\n" + CleanUp(MobilePhone) 
+                        + "\r\n" + CleanUp(WorkPhone)).Trim();
                 }
             }
 
