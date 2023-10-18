@@ -28,6 +28,7 @@ namespace WebAddressbookTests
         }             
 
         [Test, TestCaseSource("RandomGroupDataProvider")]
+        [Category("UnitTest_P1")]
         public void GroupCreationTest(GroupData group)
         {                        
             List<GroupData> oldGroups = app.Groups.GetGroupList();
