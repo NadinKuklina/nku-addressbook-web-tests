@@ -35,11 +35,11 @@ namespace WebAddressbookTests
                 {        
                     string result = string.Empty;
 
-                    if (string.IsNullOrEmpty(Firstname))
+                    if (!string.IsNullOrEmpty(Firstname))
                     {
                         result = Firstname;
                     }
-                    if (string.IsNullOrEmpty(Lastname))
+                    if (!string.IsNullOrEmpty(Lastname))
                     {
                         if (string.IsNullOrEmpty(result))
                         {

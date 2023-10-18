@@ -31,12 +31,12 @@ namespace WebAddressbookTests
         [Test]
         public void TestContactDetailPage()
         {
-            int index = 1;
-            ContactData fromForm = app.Contacts.GetContactInformationFromEditForm(index);
-            ContactData fromDetailForm = app.Contacts.GetContactInformationFromDetailPage(index);
+            int index = 0;
+            string fromForm = app.Contacts.GetContactInformationFromEditFormForDetail(index);
+            string fromDetailForm = app.Contacts.GetContactInformationFromDetailPage(index);
 
             //varification
-            Assert.AreEqual(fromForm.FI, fromDetailForm.FI);
+            Assert.AreEqual(fromForm, fromDetailForm);
         }
     }
 }

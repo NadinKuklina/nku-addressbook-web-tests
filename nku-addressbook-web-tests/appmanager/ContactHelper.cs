@@ -38,18 +38,68 @@ namespace WebAddressbookTests
             };
         }
 
-        public ContactData GetContactInformationFromDetailPage(int index)
+        public string GetContactInformationFromEditFormForDetail(int index)
+        {
+            string result = string.Empty;
+
+            ContactData contactData = GetContactInformationFromEditForm(index);
+
+            result = result + contactData.FI;
+
+            if (!string.IsNullOrEmpty(contactData.Address))
+            {
+                result = result + "\r\n"+contactData.Address;
+            }
+
+            if (!string.IsNullOrEmpty(contactData.HomePhone) 
+                || !string.IsNullOrEmpty(contactData.MobilePhone) 
+                || !string.IsNullOrEmpty(contactData.WorkPhone))
+            {
+                result = result + "\r\n";
+                if (!string.IsNullOrEmpty(contactData.HomePhone))
+                {
+                    result = result + "\r\nH: " + contactData.HomePhone;
+                }
+                if (!string.IsNullOrEmpty(contactData.MobilePhone))
+                {
+                    result = result + "\r\nM: " + contactData.MobilePhone;
+                }
+                if (!string.IsNullOrEmpty(contactData.WorkPhone))
+                {
+                    result = result + "\r\nW: " + contactData.WorkPhone;
+                }
+            }                 
+                       
+             if (!string.IsNullOrEmpty(contactData.Email1) 
+                || !string.IsNullOrEmpty(contactData.Email2) 
+                || !string.IsNullOrEmpty(contactData.Email3))
+            {
+                result = result + "\r\n";
+                if (!string.IsNullOrEmpty(contactData.Email1))
+                {
+                    result = result + "\r\n" + contactData.Email1;
+                }
+                if (!string.IsNullOrEmpty(contactData.Email2))
+                {
+                    result = result + "\r\n" + contactData.Email2;
+                }
+                if (!string.IsNullOrEmpty(contactData.Email3))
+                {
+                    result = result + "\r\n" + contactData.Email3;
+                }
+            }                  
+
+            result = result + "\r\n\r\n\r\n\r\n\r\n\r\n\r\n";
+
+            return result;
+        }
+
+        public string GetContactInformationFromDetailPage(int index)
         {
             manager.Navigator.GoToHomePage();
             OpenDetailInformationByIndex(index);
-
-            string fiFromDetailPage = driver.FindElement(By.XPath("//div[@id='content']/b")).GetAttribute("textContent");       
-            string addressFromDetailPage = driver.FindElement(By.XPath("//div[@id='content']/br[1]")).GetAttribute("textContent");
-
-            return new ContactData("", "")
-            {
-                FI = fiFromDetailPage
-            };
+            string infoFromDetalPage = driver.FindElement(By.XPath("//div[@id='content']")).GetAttribute("outerText");
+            return infoFromDetalPage;
         }
 
         public ContactHelper OpenDetailInformationByIndex(int index)
@@ -72,17 +122,36 @@ namespace WebAddressbookTests
 
             string email1 = driver.FindElement(By.Name("email")).GetAttribute("value");
             string email2 = driver.FindElement(By.Name("email2")).GetAttribute("value");
-            string email3 = driver.FindElement(By.Name("email3")).GetAttribute("value");                    
+            string email3 = driver.FindElement(By.Name("email3")).GetAttribute("value");
+
+            string fiFromEditForm = string.Empty;
+
+            if (!string.IsNullOrEmpty(firstName))
+            {
+                fiFromEditForm = firstName;
+            }
+            if (!string.IsNullOrEmpty(lastName))
+            {
+                if (string.IsNullOrEmpty(fiFromEditForm))
+                {
+                    fiFromEditForm = lastName;
+                }
+                else
+                {
+                    fiFromEditForm = fiFromEditForm + " " + lastName;
+                }
+            }
 
             return new ContactData(firstName, lastName)
             {
                 Address = address,
                 HomePhone = homePhone,
-                MobilePhone = mobilePhone,                    
+                MobilePhone = mobilePhone,
                 WorkPhone = workPhone,
                 Email1 = email1,
                 Email2 = email2,
-                Email3 = email3                    
+                Email3 = email3,
+                FI = fiFromEditForm
             };
         }
 
