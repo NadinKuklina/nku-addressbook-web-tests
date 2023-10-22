@@ -12,7 +12,7 @@ namespace WebAddressbookTests
 {
     public class ContactHelper : HelperBase
     {
-        private List<ContactData> contactCache = null;
+        private List<ContactData> contactCache = null;       
 
         public ContactHelper(ApplicationManager manager) : base(manager)
         {            
@@ -40,66 +40,117 @@ namespace WebAddressbookTests
 
         public string GetContactInformationFromEditFormForDetail(int index)
         {
-            string result = string.Empty;
+            string result = "";
 
             ContactData contactData = GetContactInformationFromEditForm(index);
 
-            result = result + contactData.FI;
+            result = result + contactData.FI
+                + contactData.Address;
 
-            if (!string.IsNullOrEmpty(contactData.Address))
+            if (!string.IsNullOrEmpty(contactData.HomePhone))
             {
-                result = result + "\r\n"+contactData.Address;
+                result = result + "H: " + contactData.HomePhone;
+            }
+            if (!string.IsNullOrEmpty(contactData.MobilePhone))
+            {
+                result = result + "M: " + contactData.MobilePhone;
+            }
+            if (!string.IsNullOrEmpty(contactData.WorkPhone))
+            {
+                result = result + "W: " + contactData.WorkPhone;
             }
 
-            if (!string.IsNullOrEmpty(contactData.HomePhone) 
-                || !string.IsNullOrEmpty(contactData.MobilePhone) 
-                || !string.IsNullOrEmpty(contactData.WorkPhone))
-            {
-                result = result + "\r\n";
-                if (!string.IsNullOrEmpty(contactData.HomePhone))
-                {
-                    result = result + "\r\nH: " + contactData.HomePhone;
-                }
-                if (!string.IsNullOrEmpty(contactData.MobilePhone))
-                {
-                    result = result + "\r\nM: " + contactData.MobilePhone;
-                }
-                if (!string.IsNullOrEmpty(contactData.WorkPhone))
-                {
-                    result = result + "\r\nW: " + contactData.WorkPhone;
-                }
-            }                 
-                       
-             if (!string.IsNullOrEmpty(contactData.Email1) 
-                || !string.IsNullOrEmpty(contactData.Email2) 
-                || !string.IsNullOrEmpty(contactData.Email3))
-            {
-                result = result + "\r\n";
-                if (!string.IsNullOrEmpty(contactData.Email1))
-                {
-                    result = result + "\r\n" + contactData.Email1;
-                }
-                if (!string.IsNullOrEmpty(contactData.Email2))
-                {
-                    result = result + "\r\n" + contactData.Email2;
-                }
-                if (!string.IsNullOrEmpty(contactData.Email3))
-                {
-                    result = result + "\r\n" + contactData.Email3;
-                }
-            }                  
-
-            result = result + "\r\n\r\n\r\n\r\n\r\n\r\n\r\n";
+            result = result
+                + contactData.Email1
+                + contactData.Email2
+                + contactData.Email3;
 
             return result;
         }
 
         public string GetContactInformationFromDetailPage(int index)
         {
+            string fiFromDetail = string.Empty;
+            string addressFromDetail = string.Empty;
+            string phonesFromDetails = string.Empty;
+            string emailsFromDetail = string.Empty;
+            string result = "";
+
             manager.Navigator.GoToHomePage();
             OpenDetailInformationByIndex(index);
-            string infoFromDetalPage = driver.FindElement(By.XPath("//div[@id='content']")).GetAttribute("outerText");
-            return infoFromDetalPage;
+
+            string infoFromDetalPage = driver.FindElement(By.XPath("/html//div[@id='content']")).Text;
+            fiFromDetail = driver.FindElement(By.XPath("/html//div[@id='content']/b")).GetAttribute("textContent").Trim();
+            
+            string pattern = @"\r\n";
+            string[] arrayOfStrings = Regex.Split(infoFromDetalPage, pattern);
+                                    
+            Regex rPatternHomePhone = new Regex("H: ");
+            Regex rPatternMobilePhone = new Regex("M: ");
+            Regex rPatternWorkPhone = new Regex("W: ");
+            //Regex rEmails = new Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$");
+
+            for (int i = 0; i < arrayOfStrings.Length; i++)
+            {
+                if (!string.IsNullOrEmpty(arrayOfStrings[i]) 
+                    && arrayOfStrings[i] != " "                     
+                    && !rPatternHomePhone.IsMatch(arrayOfStrings[i])
+                    && !rPatternMobilePhone.IsMatch(arrayOfStrings[i])
+                    && !rPatternWorkPhone.IsMatch(arrayOfStrings[i])
+                    && !isThisLink(arrayOfStrings[i]))
+                {
+                    if (!string.IsNullOrEmpty(fiFromDetail))
+                    {
+                        Regex rPatternFI = new Regex(fiFromDetail);
+
+                        if (!rPatternFI.IsMatch(arrayOfStrings[i]))
+                        {
+                            addressFromDetail = arrayOfStrings[i];
+                        }                        
+                    }    
+                    else
+                    {
+                        addressFromDetail = arrayOfStrings[i];
+                    }
+                }
+
+                if (rPatternHomePhone.IsMatch(arrayOfStrings[i]))
+                {
+                    phonesFromDetails = phonesFromDetails + arrayOfStrings[i];
+                }
+
+                if (rPatternMobilePhone.IsMatch(arrayOfStrings[i]))
+                {
+                    phonesFromDetails = phonesFromDetails + arrayOfStrings[i];
+                }
+
+                if (rPatternWorkPhone.IsMatch(arrayOfStrings[i]))
+                {
+                    phonesFromDetails = phonesFromDetails + arrayOfStrings[i];
+                }
+
+                if (isThisLink(arrayOfStrings[i]))
+                {
+                    
+                    emailsFromDetail = emailsFromDetail + arrayOfStrings[i];
+                }
+            }
+
+            result = fiFromDetail + addressFromDetail + phonesFromDetails + emailsFromDetail;
+
+            return result;
+        }
+
+        public bool isThisLink(string text)
+        {
+            if(IsElementPresent(By.XPath("//div[@id='content']/a[contains(@href,'" + text + "')]")))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }            
         }
 
         public ContactHelper OpenDetailInformationByIndex(int index)
