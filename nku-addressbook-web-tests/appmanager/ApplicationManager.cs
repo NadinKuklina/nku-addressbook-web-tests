@@ -32,7 +32,7 @@ namespace WebAddressbookTests
             groupHelper = new GroupHelper(this);
             contactHelper = new ContactHelper(this);
         }
-        /*
+        
         
         ~ApplicationManager()
         {
@@ -45,7 +45,7 @@ namespace WebAddressbookTests
                 //Ignore errors if unable to close the browser               
             }
         }                
-       */
+       
 
         public static ApplicationManager GetIntance()
         {
