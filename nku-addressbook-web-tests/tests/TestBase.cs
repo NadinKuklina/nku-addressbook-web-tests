@@ -29,7 +29,7 @@ namespace WebAddressbookTests
             StringBuilder builder = new StringBuilder();
             for (int i = 0; i < l; i++)
             {
-                builder.Append(Convert.ToChar(32 + Convert.ToInt32(rnd.NextDouble() * 223)));
+                builder.Append(Convert.ToChar(32 + Convert.ToInt32(rnd.NextDouble() * 65)));
             }
             return builder.ToString();
         }
@@ -43,13 +43,13 @@ namespace WebAddressbookTests
             return s;
         }
 
-        /*
+        
         [TearDown]
         public void TearDownApplicationManager()
         {
             ApplicationManager.GetIntance().Driver.Quit();
         }
-        */
+        
         
     }
 }

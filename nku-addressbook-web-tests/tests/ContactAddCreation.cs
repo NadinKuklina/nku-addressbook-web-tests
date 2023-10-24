@@ -42,8 +42,8 @@ namespace WebAddressbookTests
             }
             return builder.ToString();
         }
-               
 
+       
         [Test, TestCaseSource("RandomContactDataProvider")]
         public void ContactCreationTest(ContactData contact)
         {               

@@ -5,16 +5,35 @@ VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nku-addressbook-web-tests", "nku-addressbook-web-tests\nku-addressbook-web-tests.csproj", "{3359B243-E2A6-4FA8-ADE9-9C1C87D8DB4B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "addressbook-test-data-generators", "addressbook-test-data-generators\addressbook-test-data-generators.csproj", "{A5630006-92BA-4FD6-8551-9246E21797BD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3359B243-E2A6-4FA8-ADE9-9C1C87D8DB4B} = {3359B243-E2A6-4FA8-ADE9-9C1C87D8DB4B}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{3359B243-E2A6-4FA8-ADE9-9C1C87D8DB4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3359B243-E2A6-4FA8-ADE9-9C1C87D8DB4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3359B243-E2A6-4FA8-ADE9-9C1C87D8DB4B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3359B243-E2A6-4FA8-ADE9-9C1C87D8DB4B}.Debug|x86.Build.0 = Debug|Any CPU
 		{3359B243-E2A6-4FA8-ADE9-9C1C87D8DB4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3359B243-E2A6-4FA8-ADE9-9C1C87D8DB4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3359B243-E2A6-4FA8-ADE9-9C1C87D8DB4B}.Release|x86.ActiveCfg = Release|Any CPU
+		{3359B243-E2A6-4FA8-ADE9-9C1C87D8DB4B}.Release|x86.Build.0 = Release|Any CPU
+		{A5630006-92BA-4FD6-8551-9246E21797BD}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{A5630006-92BA-4FD6-8551-9246E21797BD}.Debug|Any CPU.Build.0 = Debug|x86
+		{A5630006-92BA-4FD6-8551-9246E21797BD}.Debug|x86.ActiveCfg = Debug|x86
+		{A5630006-92BA-4FD6-8551-9246E21797BD}.Debug|x86.Build.0 = Debug|x86
+		{A5630006-92BA-4FD6-8551-9246E21797BD}.Release|Any CPU.ActiveCfg = Release|x86
+		{A5630006-92BA-4FD6-8551-9246E21797BD}.Release|Any CPU.Build.0 = Release|x86
+		{A5630006-92BA-4FD6-8551-9246E21797BD}.Release|x86.ActiveCfg = Release|x86
+		{A5630006-92BA-4FD6-8551-9246E21797BD}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
