@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfGroupData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <GroupData>
+    <Name>Группа из файла</Name>
+    <Header>заголовок из файла</Header>
+    <Footer>футер</Footer>
+  </GroupData>
+  <GroupData>
+    <Name>имя2</Name>
+    <Header>хедер2</Header>
+    <Footer>футер2</Footer>
+  </GroupData>
+</ArrayOfGroupData>
