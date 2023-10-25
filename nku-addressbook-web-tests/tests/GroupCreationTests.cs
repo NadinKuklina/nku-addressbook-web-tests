@@ -10,6 +10,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace WebAddressbookTests
 {
@@ -54,8 +55,15 @@ namespace WebAddressbookTests
                     .Deserialize(new StreamReader(@"groups.xml"));            
         }
 
-        [Test, TestCaseSource("GroupDataFromXMLFile")]
-        [Category("UnitTest_P1")]
+        public static IEnumerable<GroupData> GroupDataFromJSONFile()
+        {        
+            return JsonConvert.DeserializeObject<List<GroupData>>(
+                File.ReadAllText(@"groups.json"));
+
+            
+        }
+
+        [Test, TestCaseSource("GroupDataFromJSONFile")]        
         public void GroupCreationTest(GroupData group)
         {                        
             List<GroupData> oldGroups = app.Groups.GetGroupList();
