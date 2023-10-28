@@ -7,6 +7,9 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 using System.Collections.Generic;
+using System.Xml;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace WebAddressbookTests
 {
@@ -31,6 +34,12 @@ namespace WebAddressbookTests
             }
             return contact;
         }
+        public static IEnumerable<ContactData> ContactDataFromXMLFile()
+        {
+            return (List<ContactData>)
+                new XmlSerializer(typeof(List<ContactData>))
+                    .Deserialize(new StreamReader(@"contacts.xml"));
+        }
 
         public static string GenerateRandomEmail()
         {
@@ -44,7 +53,7 @@ namespace WebAddressbookTests
         }
 
        
-        [Test, TestCaseSource("RandomContactDataProvider")]
+        [Test, TestCaseSource("ContactDataFromXMLFile")]
         public void ContactCreationTest(ContactData contact)
         {               
             List<ContactData> oldContacts = app.Contacts.GetContactsList();

@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfGroupData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <GroupData>
-    <Name>Группа из файла</Name>
-    <Header>заголовок из файла</Header>
-    <Footer>футер</Footer>
+    <Name>#7WO</Name>
+    <Header>A\</Header>
+    <Footer>K;</Footer>
   </GroupData>
   <GroupData>
-    <Name>имя2</Name>
-    <Header>хедер2</Header>
-    <Footer>футер2</Footer>
+    <Name>:/</Name>
+    <Header>\/</Header>
+    <Footer>:$1-8</Footer>
+  </GroupData>
+  <GroupData>
+    <Name>7D0</Name>
+    <Header>KU;</Header>
+    <Footer>R1</Footer>
   </GroupData>
 </ArrayOfGroupData>
