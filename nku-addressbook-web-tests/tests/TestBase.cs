@@ -43,13 +43,13 @@ namespace WebAddressbookTests
             return s;
         }
 
-        
+        /*
         [TearDown]
         public void TearDownApplicationManager()
         {
             ApplicationManager.GetIntance().Driver.Quit();
         }
-        
+        */
         
     }
 }
