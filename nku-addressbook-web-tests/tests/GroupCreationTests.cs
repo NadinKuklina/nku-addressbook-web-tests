@@ -12,6 +12,7 @@ using OpenQA.Selenium.Support.UI;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Excel = Microsoft.Office.Interop.Excel;
+using System.Linq;
 
 namespace WebAddressbookTests
 {
@@ -123,6 +124,22 @@ namespace WebAddressbookTests
             oldGroups.Sort();
             newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);
+        }
+
+        [Test]
+        public void TestDBConnectivity()
+        {
+            DateTime start = DateTime.Now;
+            List<GroupData> fromUi = app.Groups.GetGroupList();
+            DateTime end = DateTime.Now;
+            System.Console.Out.WriteLine(end.Subtract(start));
+
+            start = DateTime.Now;
+            AddressBookDB db = new AddressBookDB();
+            List<GroupData> fromDb = (from g in db.Groups select g).ToList();
+            db.Close();
+            end = DateTime.Now;
+            System.Console.Out.WriteLine(end.Subtract(start));
         }
     }
 }

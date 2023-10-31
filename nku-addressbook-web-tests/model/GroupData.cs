@@ -6,25 +6,31 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
+using LinqToDB.Mapping;
 
 namespace WebAddressbookTests
 {
-     public class GroupData : IEquatable<GroupData>, IComparable<GroupData>
-    {
-        
+    [Table(Name = "group_list")]
+    public class GroupData : IEquatable<GroupData>, IComparable<GroupData>
+    {        
         public GroupData(string name)
         {
             Name = name;
         }
         public GroupData()
-        {           
+        {
         }
+
+        [Column(Name = "group_name"), NotNull]
         public string Name { get; set; }
-        
+
+        [Column(Name = "group_header")]
         public string Header { get; set; }
-        
-        public string Footer { get; set; }       
-        
+
+        [Column(Name = "group_footer")]
+        public string Footer { get; set; }
+
+        [Column(Name = "group_id"), PrimaryKey, Identity]
         public string Id { get; set; }
 
         public int CompareTo(GroupData other)
