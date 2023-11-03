@@ -65,9 +65,25 @@ namespace WebAddressbookTests
             return new List<GroupData>(groupCache);
         }
 
+        public GroupHelper Remove(GroupData toBeRemoved)
+        {
+            manager.Navigator.GoToGroupPage();
+            SelectGroup(toBeRemoved.Id);
+            RemoveGroup();
+            ReturnToGroupPage();
+            return this;
+        }
+
+        public GroupHelper SelectGroup(String id)
+        {
+           driver.FindElement(By.XPath("//input[@name='selected[]' and @value='" + id + "']")).Click();           
+           return this;
+        }
+
         public GroupHelper ModifyByIndex(int i, GroupData newData)
         {
-            manager.Navigator.GoToGroupPage();            
+            manager.Navigator.GoToGroupPage();   
+            
             SelectGroup(i);
             InitGroupModification();
             FillGroupForm(newData);
