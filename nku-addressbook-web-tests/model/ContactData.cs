@@ -7,6 +7,8 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 using LinqToDB.Mapping;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace WebAddressbookTests
 {
@@ -16,6 +18,9 @@ namespace WebAddressbookTests
         private string allPhones;        
         private string fi;
         private string allEmails;
+
+        [Column(Name = "deprecated")]
+        public string Deprecated { get; set; }
 
         [Column(Name = "id"), PrimaryKey]
         public string Id { get; set; }
@@ -234,6 +239,14 @@ namespace WebAddressbookTests
             else
             {
                 return this.Lastname.CompareTo(other.Lastname);
+            }
+        }
+
+        public static List<ContactData> GetAll()
+        {
+            using (AddressBookDB db = new AddressBookDB())
+            {
+                return (from c in db.Contacts.Where(x => x.Deprecated == "0000-00-00 00:00:00") select c).ToList();
             }
         }
     }
