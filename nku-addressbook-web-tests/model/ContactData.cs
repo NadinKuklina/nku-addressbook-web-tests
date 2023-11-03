@@ -6,18 +6,24 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
+using LinqToDB.Mapping;
 
 namespace WebAddressbookTests
 {
+    [Table(Name = "addressbook")]
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
         private string allPhones;        
         private string fi;
         private string allEmails;
 
+        [Column(Name = "id"), PrimaryKey]
+        public string Id { get; set; }
+        [Column(Name ="firstname")]
         public string Firstname { get; set; }
         public string MiddleName { get; set; }
 
+        [Column(Name = "lastname")]
         public string Lastname { get; set; }
         public string Address { get; set; }
         public string HomePhone { get; set; }
@@ -173,9 +179,7 @@ namespace WebAddressbookTests
             }
             return Regex.Replace(phone, " -()", "\r\n");
                 //phone.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "") + "\r\n";
-        }
-
-        public string Id { get; set; }
+        }        
 
         public ContactData()
         {
