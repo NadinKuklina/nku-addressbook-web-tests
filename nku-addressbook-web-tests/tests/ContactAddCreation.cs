@@ -14,7 +14,7 @@ using System.IO;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class ContactTests : AuthTestBase
+    public class ContactTests : ContactTestBase
     {
         public static IEnumerable<ContactData> RandomContactDataProvider()
         {
