@@ -36,14 +36,14 @@ namespace WebAddressbookTests
             newData.Header = null;
             newData.Footer = null;
 
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            List<GroupData> oldGroups = GroupData.GetAll(); //app.Groups.GetGroupList();
             GroupData oldData = oldGroups[i];
 
-            app.Groups.ModifyByIndex(i, newData);
+            app.Groups.Modify(oldData, newData); //ModifyByIndex(i, newData);
 
             Assert.AreEqual(oldGroups.Count, app.Groups.iGroupsCount());
 
-            List<GroupData> newGroups = app.Groups.GetGroupList();
+            List<GroupData> newGroups = GroupData.GetAll(); //app.Groups.GetGroupList();
             oldGroups[i].Name = newData.Name;
             oldGroups.Sort();
             newGroups.Sort();

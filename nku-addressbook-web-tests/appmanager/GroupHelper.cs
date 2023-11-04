@@ -65,6 +65,18 @@ namespace WebAddressbookTests
             return new List<GroupData>(groupCache);
         }
 
+        public GroupHelper Modify(GroupData group, GroupData newData)
+        {
+            manager.Navigator.GoToGroupPage();
+
+            SelectGroup(group.Id);
+            InitGroupModification();
+            FillGroupForm(newData);
+            SubmitGroupModification();
+            ReturnToGroupPage();
+            return this;
+        }
+
         public GroupHelper Remove(GroupData toBeRemoved)
         {
             manager.Navigator.GoToGroupPage();

@@ -30,17 +30,17 @@ namespace WebAddressbookTests
                 }
             }
 
-            List<ContactData> oldContacts = app.Contacts.GetContactsList();
+            List<ContactData> oldContacts = ContactData.GetAll(); //app.Contacts.GetContactsList();
             ContactData toBeRemoved = oldContacts[i];
 
-            app.Contacts.RemoveByIndex(i);
+            app.Contacts.Remove(toBeRemoved); //RemoveByIndex(i);
 
             Assert.AreEqual(oldContacts.Count-1, app.Contacts.iContactsCount());
 
             oldContacts.RemoveAt(i);
             oldContacts.Sort();
 
-            List<ContactData> newContacts = app.Contacts.GetContactsList();    
+            List<ContactData> newContacts = ContactData.GetAll(); //app.Contacts.GetContactsList();    
             newContacts.Sort();
 
             Assert.AreEqual(oldContacts, newContacts);

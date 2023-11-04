@@ -32,17 +32,17 @@ namespace WebAddressbookTests
 
             ContactData newData = new ContactData("newFirstName", "newLastName");
 
-            List<ContactData> oldContacts = app.Contacts.GetContactsList();
+            List<ContactData> oldContacts = ContactData.GetAll(); //app.Contacts.GetContactsList();
             ContactData oldContact = oldContacts[i];
 
-            app.Contacts.ModifyByIndex(i, newData);
+            app.Contacts.Modify(oldContact, newData); //ModifyByIndex(i, newData);
 
             Assert.AreEqual(oldContacts.Count, app.Contacts.iContactsCount());
 
             oldContacts[i].Firstname = newData.Firstname;
             oldContacts[i].Lastname = newData.Lastname;
             oldContacts.Sort();
-            List<ContactData> newContacts = app.Contacts.GetContactsList();            
+            List<ContactData> newContacts = ContactData.GetAll(); //app.Contacts.GetContactsList();            
             newContacts.Sort();
             Assert.AreEqual(oldContacts, newContacts);
 

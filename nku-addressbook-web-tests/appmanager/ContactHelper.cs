@@ -38,6 +38,33 @@ namespace WebAddressbookTests
             };
         }
 
+        public ContactHelper Modify(ContactData oldContact, ContactData newData)
+        {
+            manager.Navigator.GoToHomePage();
+            InitContactModification(oldContact.Id);
+            FillContactForm(newData);
+            SubmitContactModification();
+
+            return this;
+        }
+
+        public ContactHelper InitContactModification(string id)
+        {
+            driver.FindElement(By.XPath("//tr[@name='entry']/td/a[contains(@href,'edit.php?id=" + id+"')]")).Click();
+            return this;
+        }
+
+        public ContactHelper Remove(ContactData toBeRemoved)
+        {
+            manager.Navigator.GoToHomePage();
+            SelectContact(toBeRemoved.Id);
+            DeleteContact();
+            ConfirmYesInAlert();
+            new WebDriverWait(driver, TimeSpan.FromSeconds(10))
+               .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
+            return this;
+        }
+
         public void AddContactToGroup(ContactData contact, GroupData group)
         {
             manager.Navigator.GoToHomePage();
