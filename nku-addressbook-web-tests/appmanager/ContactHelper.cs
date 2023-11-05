@@ -38,6 +38,28 @@ namespace WebAddressbookTests
             };
         }
 
+        public ContactHelper DeleteContactFromGroup(ContactData contact, GroupData group)
+        {
+            manager.Navigator.GoToHomePage();
+            SelectGroupByName(group.Name);
+            SelectContact(contact.Id);
+            SubmitRemoveFromGroup();
+
+            return this;
+        }
+
+        public ContactHelper SelectGroupByName(string groupName)
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText(groupName);
+            return this;
+        }
+
+        public ContactHelper SubmitRemoveFromGroup()
+        {
+            driver.FindElement(By.Name("remove")).Click();
+            return this;
+        }
+
         public ContactHelper Modify(ContactData oldContact, ContactData newData)
         {
             manager.Navigator.GoToHomePage();
