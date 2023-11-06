@@ -9,6 +9,7 @@ using OpenQA.Selenium.Support.UI;
 using LinqToDB.Mapping;
 using System.Collections.Generic;
 using System.Linq;
+using LinqToDB;
 
 namespace WebAddressbookTests
 {
@@ -87,5 +88,15 @@ namespace WebAddressbookTests
                         select c).Distinct().ToList();
             }
         }
+
+        public static string LastAddedGroupId()
+        {
+            using (AddressBookDB db = new AddressBookDB())
+            {
+                //вернуть максимальный ид группы в базе
+                return (from g in db.Groups select g).Max(x => x.Id);
+            }
+        }
+
     }
 }

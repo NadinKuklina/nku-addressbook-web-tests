@@ -24,6 +24,7 @@ namespace WebAddressbookTests
 
         [Column(Name = "id"), PrimaryKey]
         public string Id { get; set; }
+
         [Column(Name ="firstname")]
         public string Firstname { get; set; }
         public string MiddleName { get; set; }
@@ -247,6 +248,13 @@ namespace WebAddressbookTests
             using (AddressBookDB db = new AddressBookDB())
             {
                 return (from c in db.Contacts.Where(x => x.Deprecated == "0000-00-00 00:00:00") select c).ToList();
+            }
+        }
+        public static string LastAddedContactId()
+        {
+            using (AddressBookDB db = new AddressBookDB())
+            {
+                return (from c in db.Contacts.Where(x => x.Deprecated == "0000-00-00 00:00:00") select c).Max(x => x.Id);
             }
         }
     }

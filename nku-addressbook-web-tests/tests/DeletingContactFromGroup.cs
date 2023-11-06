@@ -12,11 +12,19 @@ namespace WebAddressbookTests
         [Test]
         public void TestDeletingContactFromGroup()
         {
-            GroupData group = GroupData.GetAll()[0];
-            List<ContactData> oldList = group.GetContacts();
-            ContactData contact = oldList.First(); //ContactData.GetAll().Except(group.GetContacts()).First();
+            //Arrange            
+            app.Groups.Create(new GroupData("groupForTestDeleteFromGroup"));
+            string idNewGroup = GroupData.LastAddedGroupId();
+            GroupData group = GroupData.GetAll().FirstOrDefault(i => i.Id == idNewGroup);
 
-            //actions
+            app.Contacts.CreateContact(new ContactData("NameOfUser", "LastNameOfUser"));
+            string idNewContact = ContactData.LastAddedContactId();
+            ContactData contact = ContactData.GetAll().FirstOrDefault(i => i.Id == idNewContact);
+
+            app.Contacts.AddContactToGroup(contact, group);
+            List<ContactData> oldList = group.GetContacts();
+
+            //Act
             app.Contacts.DeleteContactFromGroup(contact, group);
 
             List<ContactData> newList = group.GetContacts();
@@ -24,6 +32,7 @@ namespace WebAddressbookTests
             oldList.Sort();
             newList.Sort();
 
+            //Assert
             Assert.AreEqual(oldList, newList);
         }
     }
