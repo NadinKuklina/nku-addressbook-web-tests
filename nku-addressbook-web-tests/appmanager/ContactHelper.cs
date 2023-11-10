@@ -41,10 +41,16 @@ namespace WebAddressbookTests
         public ContactHelper DeleteContactFromGroup(ContactData contact, GroupData group)
         {
             manager.Navigator.GoToHomePage();
-            SelectGroupByName(group.Name);
+            SelectGroupById(group.Id); //SelectGroupByName(group.Name);
             SelectContact(contact.Id);
             SubmitRemoveFromGroup();
 
+            return this;
+        }
+
+        public ContactHelper SelectGroupById(string id)
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByValue(id);
             return this;
         }
 
@@ -92,10 +98,16 @@ namespace WebAddressbookTests
             manager.Navigator.GoToHomePage();
             ClearGroupFilter();
             SelectContact(contact.Id);
-            SelectGroupToAdd(group.Name);
+            SelectGroupToAddById(group.Id);
             CommitAddingContactToGroup();
             new WebDriverWait(driver, TimeSpan.FromSeconds(10))
                 .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
+        }
+
+        public ContactHelper SelectGroupToAddById(string id)
+        {
+            new SelectElement(driver.FindElement(By.Name("to_group"))).SelectByValue(id);
+            return this;
         }
 
         private void CommitAddingContactToGroup()
